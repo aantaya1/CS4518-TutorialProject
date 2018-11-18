@@ -1,0 +1,69 @@
+package com.example.owner.grocerylist;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.example.owner.grocerylist.Entities.GroceryEntity;
+
+import java.util.List;
+
+public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.GroceryViewHolder>{
+
+    public static final String TAG = "GROCERY_LIST_ADAPTER";
+
+    class GroceryViewHolder extends RecyclerView.ViewHolder {
+        private final TextView groceryNameView = null;
+        private final TextView groceryQuantityView = null;
+        private final TextView groceryNotesView = null;
+
+        private GroceryViewHolder(View itemView) {
+            super(itemView);
+            //TODO: These id's need to be created in the layouts
+            groceryNameView = itemView.findViewById(R.id.recyclerview_name);
+            groceryQuantityView = itemView.findViewById(R.id.recyclerview_quantity);
+            groceryNotesView = itemView.findViewById(R.id.recyclerview_notes);
+        }
+    }
+
+    private final LayoutInflater mInflater;
+    private List<GroceryEntity> mGrocery; // Cached copy of Groceries
+
+    GroceryListAdapter(Context context) { mInflater = LayoutInflater.from(context); }
+
+    @Override
+    public GroceryViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = mInflater.inflate(R.layout.recyclerview_item, parent, false);
+        return new GroceryViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(GroceryViewHolder holder, int position) {
+        if (mGrocery != null) {
+            GroceryEntity current = mGrocery.get(position);
+            holder.groceryNameView.setText(current.getName());
+            holder.groceryNotesView.setText(current.getNotes());
+            holder.groceryQuantityView.setText(current.getQuantity());
+        } else {
+            // Covers the case of data not being ready yet.
+            holder.groceryNameView.setText("No Grocery");
+        }
+    }
+
+    void setGroceries(List<GroceryEntity> grocery){
+        mGrocery = grocery;
+        notifyDataSetChanged();
+    }
+
+    // getItemCount() is called many times, and when it is first called,
+    // mCats has not been updated (means initially, it's null, and we can't return null).
+    @Override
+    public int getItemCount() {
+        if (mGrocery != null)
+            return mGrocery.size();
+        else return 0;
+    }
+}

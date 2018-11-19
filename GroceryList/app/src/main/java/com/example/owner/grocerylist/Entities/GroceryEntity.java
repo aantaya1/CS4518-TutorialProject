@@ -27,10 +27,15 @@ public class GroceryEntity {
     @ColumnInfo(name = "notes")
     private String notes;
 
-    public GroceryEntity(@NonNull String name, @NonNull String quantity, @NonNull String notes) {
+    @NonNull
+    @ColumnInfo(name = "filepath")
+    private String filepath;
+
+    public GroceryEntity(@NonNull String name, @NonNull String quantity, @NonNull String notes, @NonNull String filepath) {
         this.name = name;
         this.quantity = quantity;
         this.notes = notes;
+        this.filepath = filepath;
     }
 
     @NonNull
@@ -69,6 +74,11 @@ public class GroceryEntity {
         this.notes = notes;
     }
 
+    @NonNull
+    public String getFilepath() { return filepath; }
+
+    public void setFilepath(@NonNull String filepath) { this.filepath = filepath; }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,6 +103,7 @@ public class GroceryEntity {
                 ", name='" + name + '\'' +
                 ", quantity='" + quantity + '\'' +
                 ", notes='" + notes + '\'' +
+                ", filepath='" + filepath + '\''+
                 '}';
     }
 }

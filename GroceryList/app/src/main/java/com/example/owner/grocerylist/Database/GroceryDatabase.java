@@ -9,8 +9,9 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import com.example.owner.grocerylist.Dao.GroceryDao;
+import com.example.owner.grocerylist.Entities.GroceryEntity;
 
-@Database(entities = {GroceryDatabase.class}, version = 1)
+@Database(entities = {GroceryEntity.class}, version = 1)
 public abstract class GroceryDatabase extends RoomDatabase{
 
     private final String TAG = "GROCERY_DATABASE";

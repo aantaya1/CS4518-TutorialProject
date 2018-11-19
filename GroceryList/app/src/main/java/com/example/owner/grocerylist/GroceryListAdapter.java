@@ -1,10 +1,12 @@
 package com.example.owner.grocerylist;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.owner.grocerylist.Entities.GroceryEntity;
@@ -16,9 +18,10 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
     public static final String TAG = "GROCERY_LIST_ADAPTER";
 
     class GroceryViewHolder extends RecyclerView.ViewHolder {
-        private final TextView groceryNameView = null;
-        private final TextView groceryQuantityView = null;
-        private final TextView groceryNotesView = null;
+        private final TextView groceryNameView;
+        private final TextView groceryQuantityView;
+        private final TextView groceryNotesView;
+        private final ImageView groceryImageView;
 
         private GroceryViewHolder(View itemView) {
             super(itemView);
@@ -26,6 +29,7 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
             groceryNameView = itemView.findViewById(R.id.recyclerview_name);
             groceryQuantityView = itemView.findViewById(R.id.recyclerview_quantity);
             groceryNotesView = itemView.findViewById(R.id.recyclerview_notes);
+            groceryImageView = itemView.findViewById(R.id.recyclerview_image);
         }
     }
 
@@ -47,6 +51,7 @@ public class GroceryListAdapter extends RecyclerView.Adapter<GroceryListAdapter.
             holder.groceryNameView.setText(current.getName());
             holder.groceryNotesView.setText(current.getNotes());
             holder.groceryQuantityView.setText(current.getQuantity());
+            holder.groceryImageView.setImageBitmap(BitmapFactory.decodeFile(current.getFilepath()));
         } else {
             // Covers the case of data not being ready yet.
             holder.groceryNameView.setText("No Grocery");

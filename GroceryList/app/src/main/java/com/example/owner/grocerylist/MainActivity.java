@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MAIN_ACTIVITY";
     public static final int NEW_GROCERY_ACTIVITY_REQUEST_CODE = 1;
+    public static final int STORAGE_PERMISSION = 2;
 
     private GroceryViewModel groceryViewModel;
 
@@ -62,8 +63,9 @@ public class MainActivity extends AppCompatActivity {
             String name = data.getStringExtra(AddGroceryActivity.EXTRA_NAME);
             String notes = data.getStringExtra(AddGroceryActivity.EXTRA_NOTES);
             String quantity = data.getStringExtra(AddGroceryActivity.EXTRA_QUANTITY);
+            String filepath = data.getStringExtra(AddGroceryActivity.EXTRA_FILEPATH);
 
-            GroceryEntity grocery = new GroceryEntity(name, quantity, notes)
+            GroceryEntity grocery = new GroceryEntity(name, quantity, notes, filepath);
             groceryViewModel.insert(grocery);
         } else {
             Toast.makeText(
